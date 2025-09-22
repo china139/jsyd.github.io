@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据智汇 - 专业数据服务提供商</title>
+    <!-- 引入外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <!-- 配置Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        accent: '#722ED1',
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+            .bg-grid {
+                background-image: radial-gradient(rgba(22, 93, 255, 0.1) 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-inter text-dark bg-white">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fa fa-database text-white text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold text-dark">数据智汇</span>
+                </a>
+                
+                <!-- 桌面导航 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">首页</a>
+                    <a href="#services" class="text-gray-700 hover:text-primary transition-colors">数据服务</a>
+                    <a href="#datasets" class="text-gray-700 hover:text-primary transition-colors">数据集</a>
+                    <a href="#cases" class="text-gray-700 hover:text-primary transition-colors">成功案例</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors">关于我们</a>
+                    <a href="#contact" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg transition-colors">
+                        咨询合作
+                    </a>
+                </nav>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-3 space-y-3">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition-colors">首页</a>
+                <a href="#services" class="block py-2 text-gray-700 hover:text-primary transition-colors">数据服务</a>
+                <a href="#datasets" class="block py-2 text-gray-700 hover:text-primary transition-colors">数据集</a>
+                <a href="#cases" class="block py-2 text-gray-700 hover:text-primary transition-colors">成功案例</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition-colors">关于我们</a>
+                <a href="#contact" class="block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-center transition-colors">
+                    咨询合作
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-32 bg-grid bg-light relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 z-10">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight mb-6">
+                        高品质数据服务<br>
+                        <span class="bg-gradient-to-r from-primary to-secondary text-gradient">驱动智能未来</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg">
+                        我们提供标准化、定制化的数据采集、标注与处理服务，助力AI训练与企业数字化转型，让数据价值最大化。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#datasets" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium text-center transition-colors">
+                            浏览数据集
+                        </a>
+                        <a href="#services" class="border border-primary text-primary hover:bg-primary/5 px-8 py-3 rounded-lg font-medium text-center transition-colors">
+                            了解服务
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center gap-8 mt-12">
+                        <div>
+                            <p class="text-3xl font-bold text-primary">500+</p>
+                            <p class="text-gray-600">合作企业</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-primary">10TB+</p>
+                            <p class="text-gray-600">数据资源</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-primary">99.8%</p>
+                            <p class="text-gray-600">数据准确率</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 relative z-10">
+                    <div class="relative">
+                        <div class="absolute -top-6 -left-6 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+                        <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
+                        <img src="https://picsum.photos/600/400?random=1" alt="数据处理与分析可视化" class="w-full h-auto rounded-2xl shadow-xl relative z-10">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 装饰元素 -->
+        <div class="absolute top-1/4 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/3 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"></div>
+    </section>
+
+    <!-- 合作客户 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-500 mb-8">值得信赖的合作伙伴</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+                <div class="text-gray-400 text-2xl font-bold">企业A</div>
+                <div class="text-gray-400 text-2xl font-bold">企业B</div>
+                <div class="text-gray-400 text-2xl font-bold">企业C</div>
+                <div class="text-gray-400 text-2xl font-bold">企业D</div>
+                <div class="text-gray-400 text-2xl font-bold">企业E</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据服务 -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">我们的核心服务</h2>
+                <p class="text-gray-600">专注于数据全生命周期管理，为人工智能训练和企业决策提供高质量数据支持</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 服务1 -->
+                <div class="bg-light rounded-xl p-8 hover:shadow-lg transition-shadow border border-gray-100">
+                    <div class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa fa-cloud-download text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">数据采集</h3>
+                    <p class="text-gray-600 mb-6">
+                        多渠道、多维度的数据采集服务，包括结构化与非结构化数据，确保数据源的多样性和准确性。
+                    </p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-primary mr-2"></i>
+                            网络数据采集
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-primary mr-2"></i>
+                            传感器数据采集
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-primary mr-2"></i>
+                            定制化数据采集
+                        </li>
+                    </ul>
+                    <a href="#contact" class="text-primary font-medium flex items-center hover:underline">
+                        了解详情 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- 服务2 -->
+                <div class="bg-light rounded-xl p-8 hover:shadow-lg transition-shadow border border-gray-100">
+                    <div class="w-14 h-14 bg-secondary/10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa fa-tags text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">数据标注</h3>
+                    <p class="text-gray-600 mb-6">
+                        专业的数据标注团队，提供图像、文本、语音、视频等多类型数据标注服务，满足不同AI训练需求。
+                    </p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-secondary mr-2"></i>
+                            图像识别标注
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-secondary mr-2"></i>
+                            自然语言处理
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-secondary mr-2"></i>
+                            语音识别转写
+                        </li>
+                    </ul>
+                    <a href="#contact" class="text-secondary font-medium flex items-center hover:underline">
+                        了解详情 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- 服务3 -->
+                <div class="bg-light rounded-xl p-8 hover:shadow-lg transition-shadow border border-gray-100">
+                    <div class="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa fa-cogs text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">数据处理与分析</h3>
+                    <p class="text-gray-600 mb-6">
+                        提供数据清洗、脱敏、整合与分析服务，将原始数据转化为有价值的信息，支持企业决策。
+                    </p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-accent mr-2"></i>
+                            数据清洗与脱敏
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-accent mr-2"></i>
+                            数据分析与挖掘
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fa fa-check text-accent mr-2"></i>
+                            数据可视化报告
+                        </li>
+                    </ul>
+                    <a href="#contact" class="text-accent font-medium flex items-center hover:underline">
+                        了解详情 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据资源展示 -->
+    <section id="datasets" class="py-20 bg-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">精选数据集</h2>
+                <p class="text-gray-600">涵盖多个领域的高质量数据集，满足不同场景下的AI训练和数据分析需求</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 数据集1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/400/300?random=2" alt="人脸识别数据集" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">图像数据</span>
+                            <span class="text-gray-500 text-sm">250K+ 样本</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">人脸识别数据集</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">包含不同年龄、性别、种族和姿态的人脸图像，适用于人脸识别算法训练。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">免费样本</span>
+                            <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">
+                                获取完整数据集 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 数据集2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/400/300?random=3" alt="自然语言处理数据集" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-secondary/10 text-secondary text-sm px-3 py-1 rounded-full">文本数据</span>
+                            <span class="text-gray-500 text-sm">1.2M+ 样本</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">自然语言处理数据集</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">多领域文本分类、情感分析和实体识别数据集，支持NLP模型训练。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">免费样本</span>
+                            <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">
+                                获取完整数据集 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 数据集3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/400/300?random=4" alt="自动驾驶场景数据集" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-accent/10 text-accent text-sm px-3 py-1 rounded-full">视频数据</span>
+                            <span class="text-gray-500 text-sm">50K+ 样本</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">自动驾驶场景数据集</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">包含城市道路、高速公路等多种场景的图像和激光雷达数据，标注详细。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">免费样本</span>
+                            <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">
+                                获取完整数据集 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-block border border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                    查看全部数据集
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据能力展示 -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">强大的数据处理能力</h2>
+                    <p class="text-gray-600 mb-8">
+                        我们拥有先进的数据处理技术和专业团队，能够高效处理大规模、多类型的数据，确保数据质量和安全。
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="mt-1 mr-4 bg-primary/10 p-2 rounded-lg">
+                                <i class="fa fa-shield text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">数据安全保障</h3>
+                                <p class="text-gray-600">严格的数据安全管理体系，确保数据采集、处理和存储全过程的安全性和合规性。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="mt-1 mr-4 bg-primary/10 p-2 rounded-lg">
+                                <i class="fa fa-bolt text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">高效处理能力</h3>
+                                <p class="text-gray-600">分布式处理架构，可并行处理PB级数据，大幅提升数据处理效率和响应速度。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="mt-1 mr-4 bg-primary/10 p-2 rounded-lg">
+                                <i class="fa fa-check-circle text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">质量控制体系</h3>
+                                <p class="text-gray-600">多层级数据质量检查机制，结合人工审核和智能校验，确保数据准确率达99.8%以上。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-light p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-6">数据处理能力指标</h3>
+                        <canvas id="capabilityChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成功案例 -->
+    <section id="cases" class="py-20 bg-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">成功案例</h2>
+                <p class="text-gray-600">我们与各行业客户合作，提供专业数据服务，助力业务增长和智能化转型</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 案例1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col md:flex-row">
+                    <div class="md:w-2/5">
+                        <img src="https://picsum.photos/300/400?random=5" alt="智能驾驶解决方案" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-3/5 p-6">
+                        <span class="bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">智能驾驶</span>
+                        <h3 class="text-xl font-bold mt-4 mb-3">为某车企提供自动驾驶训练数据</h3>
+                        <p class="text-gray-600 mb-4">
+                            提供了超过100万张道路场景图像数据标注服务，涵盖各种天气和光照条件，帮助客户提升自动驾驶算法准确率30%。
+                        </p>
+                        <a href="#contact" class="text-primary font-medium flex items-center hover:underline self-start">
+                            查看详情 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 案例2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col md:flex-row">
+                    <div class="md:w-2/5">
+                        <img src="https://picsum.photos/300/400?random=6" alt="金融风控系统" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-3/5 p-6">
+                        <span class="bg-secondary/10 text-secondary text-sm px-3 py-1 rounded-full">金融科技</span>
+                        <h3 class="text-xl font-bold mt-4 mb-3">金融风控数据服务解决方案</h3>
+                        <p class="text-gray-600 mb-4">
+                            为某大型金融机构构建了全面的风控数据体系，处理超过500万用户数据，帮助客户将风险识别率提升45%。
+                        </p>
+                        <a href="#contact" class="text-secondary font-medium flex items-center hover:underline self-start">
+                            查看详情 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <img src="https://picsum.photos/600/400?random=7" alt="数据智汇团队" class="w-full h-auto rounded-xl shadow-lg">
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">关于数据智汇</h2>
+                    <p class="text-gray-600 mb-6">
+                        数据智汇成立于2023年，是一家专注于数据服务的高科技企业，致力于为人工智能和企业数字化转型提供高质量的数据支持。
+                    </p>
+                    <p class="text-gray-600 mb-8">
+                        我们拥有一支由数据科学家、AI工程师和行业专家组成的专业团队，具备丰富的数据处理经验和技术积累，能够为不同行业客户提供定制化数据解决方案。
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-light p-5 rounded-lg">
+                            <h3 class="text-3xl font-bold text-primary mb-2">50+</h3>
+                            <p class="text-gray-600">专业数据工程师</p>
+                        </div>
+                        <div class="bg-light p-5 rounded-lg">
+                            <h3 class="text-3xl font-bold text-primary mb-2">30+</h3>
+                            <p class="text-gray-600">行业解决方案</p>
+                        </div>
+                        <div class="bg-light p-5 rounded-lg">
+                            <h3 class="text-3xl font-bold text-primary mb-2">98%</h3>
+                            <p class="text-gray-600">客户满意度</p>
+                        </div>
+                        <div class="bg-light p-5 rounded-lg">
+                            <h3 class="text-3xl font-bold text-primary mb-2">20+</h3>
+                            <p class="text-gray-600">覆盖行业</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-20 bg-primary/5">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">联系我们</h2>
+                <p class="text-gray-600">无论您有任何数据需求或疑问，都可以通过以下方式与我们联系，我们将尽快为您提供专业服务</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form id="contact-form" class="bg-white p-8 rounded-xl shadow-md">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">姓名</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的姓名" required>
+                            </div>
+                            <div>
+                                <label for="company" class="block text-gray-700 font-medium mb-2">公司</label>
+                                <input type="text" id="company" name="company" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入公司名称" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">电话</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入联系电话" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">邮箱</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入电子邮箱" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="service" class="block text-gray-700 font-medium mb-2">感兴趣的服务</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
+                                <option value="" disabled selected>请选择服务类型</option>
+                                <option value="data-collection">数据采集</option>
+                                <option value="data-annotation">数据标注</option>
+                                <option value="data-analysis">数据分析</option>
+                                <option value="custom-solution">定制化解决方案</option>
+                                <option value="other">其他服务</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">需求描述</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请详细描述您的需求..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-medium transition-colors">
+                            提交需求
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="h-full bg-white rounded-xl shadow-md p-8">
+                        <h3 class="text-2xl font-bold mb-6">联系方式</h3>
+                        
+                        <div class="space-y-6 mb-10">
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                    <i class="fa fa-map-marker text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">公司地址</h4>
+                                    <p class="text-gray-600">北京市海淀区中关村科技园区8号楼数据大厦12层</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                    <i class="fa fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">联系电话</h4>
+                                    <p class="text-gray-600">400-888-9999</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                    <i class="fa fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">电子邮箱</h4>
+                                    <p class="text-gray-600">contact@datawise.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                    <i class="fa fa-clock-o text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">工作时间</h4>
+                                    <p class="text-gray-600">周一至周五: 9:00 - 18:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">关注我们</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-primary/10 hover:bg-primary/20 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa fa-weixin text-primary"></i>
+                                </a>
+                                <a href="#" class="bg-primary/10 hover:bg-primary/20 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa fa-weibo text-primary"></i>
+                                </a>
+                                <a href="#" class="bg-primary/10 hover:bg-primary/20 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa fa-linkedin text-primary"></i>
+                                </a>
+                                <a href="#" class="bg-primary/10 hover:bg-primary/20 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa fa-github text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <a href="#" class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <i class="fa fa-database text-primary text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold">数据智汇</span>
+                    </a>
+                    <p class="text-gray-400 mb-6">
+                        专业的数据服务提供商，为人工智能和企业数字化转型提供高质量数据支持。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">服务项目</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">数据采集</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">数据标注</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">数据分析</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">数据定制服务</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">数据集销售</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">数据服务</a></li>
+                        <li><a href="#datasets" class="text-gray-400 hover:text-white transition-colors">数据集</a></li>
+                        <li><a href="#cases" class="text-gray-400 hover:text-white transition-colors">成功案例</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">联系我们</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker text-gray-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">北京市海淀区中关村科技园区8号楼数据大厦12层</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">400-888-9999</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">contact@datawise.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-center md:text-left mb-4 md:mb-0">© 2023 数据智汇科技有限公司 版权所有</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">隐私政策</a>
+                        <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">服务条款</a>
+                        <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">法律声明</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('shadow-sm');
+                
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('shadow-sm');
+                
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动菜单（如果打开）
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 返回顶部按钮
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 表单提交处理
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // 模拟表单提交
+            alert('感谢您的咨询！我们会尽快与您联系。');
+            contactForm.reset();
+        });
+        
+        // 数据能力图表
+        const ctx = document.getElementById('capabilityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['数据处理速度', '数据准确率', '数据安全性', '定制化能力', '多类型支持', '服务响应速度'],
+                datasets: [{
+                    label: '我们的能力',
+                    data: [95, 99.8, 98, 96, 97, 94],
+                    backgroundColor: 'rgba(22, 93, 255, 0.2)',
+                    borderColor: 'rgba(22, 93, 255, 1)',
+                    pointBackgroundColor: 'rgba(22, 93, 255, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(22, 93, 255, 1)'
+                }, {
+                    label: '行业平均',
+                    data: [70, 85, 75, 65, 72, 68],
+                    backgroundColor: 'rgba(159, 168, 176, 0.2)',
+                    borderColor: 'rgba(159, 168, 176, 1)',
+                    pointBackgroundColor: 'rgba(159, 168, 176, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(159, 168, 176, 1)'
+                }]
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true
+                        },
+                        suggestedMin: 50,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
